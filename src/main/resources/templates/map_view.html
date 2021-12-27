@@ -1,8 +1,11 @@
 <th:block>
     <div id="box">
+        <input type="hidden" th:value="${coordinates}" id="listCord">
         <div id="osm-map" class="leaflet-container" style="position: absolute;height: 80%;width: 95%;"></div>
     </div>
     <script>
-        mapView([${coordinates}]);
+        var lista = document.getElementById("listCord").value;
+        console.log(lista);
+        mapView(lista);
     </script>
 </th:block>

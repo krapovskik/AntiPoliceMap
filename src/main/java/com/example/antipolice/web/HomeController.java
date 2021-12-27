@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
+
 @Controller
 @RequestMapping("/anti-police")
 public class HomeController {
@@ -23,7 +26,7 @@ public class HomeController {
 
 
     @GetMapping
-    public String getHomePage(Model model){
+    public String getHomePage(HttpServletRequest req, Model model){
         model.addAttribute("coordinates",mapCoordinatesService.findAll());
         model.addAttribute("body","map_view");
         return "base";

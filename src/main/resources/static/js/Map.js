@@ -15,10 +15,7 @@ function mapView(lista) {
         target.lat = ev.latlng.lat;
         target.lng = ev.latlng.lng;
         map.setView(target,17);
-        for (let i = 0; i<lista.length;i++){
-            var marker = L.marker(lista[i].latlng);
-            map.addLayer(marker);
-        }
+        alert(lista)
     });
 
 
