@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface MapCoordinatesService {
-    MapCoordinates save(String latlng,String state);
+    MapCoordinates save(String latlng,String state,String username);
     List<MapCoordinates> findAll();
 }

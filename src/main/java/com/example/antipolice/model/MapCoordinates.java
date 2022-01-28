@@ -32,10 +32,11 @@ public class MapCoordinates {
     public MapCoordinates() {
     }
 
-    public MapCoordinates(LatLng latlng, PoliceState state) {
+    public MapCoordinates(LatLng latlng, PoliceState state,User user) {
         this.latlng = latlng;
         this.state = state;
         this.status = MapCoordStatus.VALID;
         this.timeSubmited = LocalDateTime.now();
+        this.user = user;
     }
 }

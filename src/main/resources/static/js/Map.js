@@ -1,7 +1,22 @@
-function mapView(lista) {
+function mapView() {
     var element = document.getElementById('osm-map');
 // Create Leaflet map on map element.
     var map = L.map(element);
+
+    var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET','http://127.0.0.1:8080/api/anti-police')
+    ourRequest.onload = function (){
+        var ourData = JSON.parse(ourRequest.responseText);
+        var marker;
+        for(let i = 0; i<ourData.length; i++){
+            marker = L.marker(ourData[i].latlng)
+            map.addLayer(marker);
+            marker.bindPopup('<p>Type of police: ' + ourData[i].state + ' </p>' +
+                '<p>From user: ' + ourData[i].user.username);
+        }
+
+    };
+    ourRequest.send();
 
 // Add OSM tile layer to the Leaflet map.
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -15,7 +30,6 @@ function mapView(lista) {
         target.lat = ev.latlng.lat;
         target.lng = ev.latlng.lng;
         map.setView(target,17);
-        alert(lista)
     });
 
 
@@ -28,6 +42,8 @@ function showLatLng(){
     var element = document.getElementById('osm-map');
 // Create Leaflet map on map element.
     var map = L.map(element);
+
+
 
 // Add OSM tile layer to the Leaflet map.
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
