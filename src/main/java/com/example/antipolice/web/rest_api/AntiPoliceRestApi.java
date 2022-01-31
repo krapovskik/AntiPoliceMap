@@ -4,6 +4,7 @@ import com.example.antipolice.model.MapCoordinates;
 import com.example.antipolice.service.MapCoordinatesService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,7 +20,9 @@ public class AntiPoliceRestApi {
     }
 
     @GetMapping
-    public List<MapCoordinates> getAll(){
-        return mapCoordinatesService.findAll();
+    public List<MapCoordinates> getAll(@RequestParam(required = false) String filter){
+        if(filter != null && filter.equals("mostSubmitted"))
+            return mapCoordinatesService.findAllMostSubmitted();
+        return mapCoordinatesService.findAllValid();
     }
 }

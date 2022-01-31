@@ -2,17 +2,20 @@ function mapView() {
     var element = document.getElementById('osm-map');
 // Create Leaflet map on map element.
     var map = L.map(element);
-
+    var filter = document.getElementById('filter');
     var ourRequest = new XMLHttpRequest();
-    ourRequest.open('GET','http://127.0.0.1:8080/api/anti-police')
+    if(filter.value.length !== 0) ourRequest.open('GET','http://127.0.0.1:8080/api/anti-police?filter=mostSubmitted')
+    else ourRequest.open('GET','http://127.0.0.1:8080/api/anti-police')
     ourRequest.onload = function (){
         var ourData = JSON.parse(ourRequest.responseText);
         var marker;
         for(let i = 0; i<ourData.length; i++){
             marker = L.marker(ourData[i].latlng)
             map.addLayer(marker);
-            marker.bindPopup('<p>Type of police: ' + ourData[i].state + ' </p>' +
-                '<p>From user: ' + ourData[i].user.username);
+            if(ourData[i].user != null && ourData[i].state != null) {
+                marker.bindPopup('<p>Type of police: ' + ourData[i].state + ' </p>' +
+                    '<p>From user: ' + ourData[i].user.username);
+            }
         }
 
     };
@@ -31,10 +34,6 @@ function mapView() {
         target.lng = ev.latlng.lng;
         map.setView(target,17);
     });
-
-
-// Set map's center to target with zoom 14.
-//     map.setView(target, 15);
 
 }
 

@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface MapCoordinatesService {
     MapCoordinates save(String latlng,String state,String username);
-    List<MapCoordinates> findAll();
+    void save(MapCoordinates mapCoordinates);
+    List<MapCoordinates> findAllValid();
+    List<MapCoordinates> findAllMostSubmitted();
 }

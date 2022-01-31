@@ -39,4 +39,8 @@ public class MapCoordinates {
         this.timeSubmited = LocalDateTime.now();
         this.user = user;
     }
+
+    public MapCoordinates(LatLng latlng) {
+        this.latlng = latlng;
+    }
 }

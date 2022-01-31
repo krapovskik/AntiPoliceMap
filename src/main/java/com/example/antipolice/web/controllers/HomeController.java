@@ -23,8 +23,10 @@ public class HomeController {
 
 
     @GetMapping
-    public String getHomePage(Model model){
+    public String getHomePage(@RequestParam(required = false)String filter, Model model){
         model.addAttribute("body","map_view");
+        if (filter != null && filter.equals("mostSubmitted"))
+            model.addAttribute("filter",filter);
         return "base";
     }
 

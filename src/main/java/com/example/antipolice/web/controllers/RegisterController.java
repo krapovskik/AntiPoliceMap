@@ -1,6 +1,7 @@
 package com.example.antipolice.web.controllers;
 
 import com.example.antipolice.model.exceptions.InvalidArgumentsException;
+import com.example.antipolice.model.exceptions.UnderAgeException;
 import com.example.antipolice.model.exceptions.UsernameAlreadyExistsException;
 import com.example.antipolice.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class RegisterController {
         try{
             this.userService.register(username, password, age);
             return "redirect:/login";
-        } catch (UsernameAlreadyExistsException | InvalidArgumentsException exception) {
+        } catch (UsernameAlreadyExistsException | InvalidArgumentsException | UnderAgeException exception) {
             return "redirect:/register?error=" + exception.getMessage();
         }
     }
