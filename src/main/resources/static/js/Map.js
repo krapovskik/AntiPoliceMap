@@ -4,8 +4,8 @@ function mapView() {
     var map = L.map(element);
     var filter = document.getElementById('filter');
     var ourRequest = new XMLHttpRequest();
-    if(filter.value.length !== 0) ourRequest.open('GET','http://127.0.0.1:8080/api/anti-police?filter=mostSubmitted')
-    else ourRequest.open('GET','http://127.0.0.1:8080/api/anti-police')
+    if(filter.value.length !== 0) ourRequest.open('GET','https://anti-police.herokuapp.com/api/anti-police?filter=mostSubmitted')
+    else ourRequest.open('GET','https://anti-police.herokuapp.com/api/anti-police')
     ourRequest.onload = function (){
         var ourData = JSON.parse(ourRequest.responseText);
         var marker;
